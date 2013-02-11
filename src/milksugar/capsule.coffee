@@ -1,8 +1,6 @@
-((window, MilkSugar) ->
+do (window = @, MilkSugar = @MilkSugar or= {}) ->
   "use strict";
    
   class MilkSugar.Capsule
     constructor: ->
     
-   
-)(@, @MilkSugar or= {})

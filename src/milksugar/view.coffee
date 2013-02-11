@@ -1,4 +1,4 @@
-((window, MilkSugar, $, Handlebars) ->
+do (window = @, MilkSugar = @MilkSugar or= {}, $ = @jQuery, Handlebars = @Handlebars) ->
 
   check = window.check
 
@@ -27,5 +27,3 @@
       $.ajax(@view).done(->
         
       )
-
-)(@, @MilkSugar or= {}, @jQuery, @Handlebars)

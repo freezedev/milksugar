@@ -1,4 +1,4 @@
-((window, MilkSugar, $, async) ->
+do (window = @, MilkSugar = @MilkSugar or= {}, $ = @jQuery, async = @async) ->
   "use strict"
   
   class MilkSugar.Preloader
@@ -21,6 +21,3 @@
     start: ->
       assetPromise.done (assets) ->
         console.log assets        
-      
-  
-)(@, @MilkSugar or= {}, @jQuery, @async);

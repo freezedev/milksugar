@@ -1,4 +1,4 @@
-((window, document, String) -> 
+do (window = @, document, String) ->
   "use strict";
   
   ###
@@ -139,5 +139,3 @@
       clearTimeout id
 
   null # Return null
-  
-)(@, document, String) 

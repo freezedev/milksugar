@@ -1,4 +1,4 @@
-((window, MilkSugar) ->
+do (window = @, MilkSugar = @MilkSugar) ->
   'use strict';
 
   class AppModel extends MilkSugar.App
@@ -14,5 +14,3 @@
   
   window.App = new AppModel()
   window.App.run()
-
-)(@, @MilkSugar)

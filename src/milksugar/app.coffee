@@ -1,4 +1,4 @@
-((window, MilkSugar, $) ->
+do (window = @, MilkSugar = @MilkSugar or= {}, $ = @jQuery) ->
   "use strict"
   
   # Rebind method for JSHint
@@ -26,6 +26,3 @@
       
     run: ->
       $('title').html @name if @name
-      
-  
-)(@, @MilkSugar or= {}, @jQuery)
