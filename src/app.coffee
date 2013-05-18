@@ -1,7 +1,7 @@
-do (window = @, MilkSugar = @MilkSugar) ->
+define 'app', ['milksugar/app'], (MilkSugarApp) ->
   'use strict';
 
-  class AppModel extends MilkSugar.App
+  class AppModel extends MilkSugarApp
 
     constructor: ->
       super()
@@ -12,5 +12,5 @@ do (window = @, MilkSugar = @MilkSugar) ->
       
 
   
-  window.App = new AppModel()
-  window.App.run()
+  App = new AppModel()
+  App.run()
