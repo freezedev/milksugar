@@ -1,7 +1,7 @@
-do (window = @, MilkSugar = @MilkSugar or= {}) ->
+define 'milksugar/assets', ->
   "use strict";
    
-  MilkSugar.Assets =
+  Assets =
     root: 'assets'
     add: (pathName, alias = "#{pathName}s") ->
       @[pathName] = (assetName) ->
@@ -9,3 +9,5 @@ do (window = @, MilkSugar = @MilkSugar or= {}) ->
         MilkSugar.Assets.path MilkSugar.Assets.root, realPathName, assetName
     remove: (pathName) -> delete @[pathName] if @[pathName]
     path: (paths...) -> paths.join '/'
+    
+  return Assets
