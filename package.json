@@ -1,14 +1,12 @@
 {
-  "name": "MilkSugar",
-  "version": "0.0.1",
+  "name": "milkaugar",
+  "version": "0.1.0",
   "private": true,
   "devDependencies": {
     "grunt": "0.4.x",
     "grunt-contrib-uglify": "*",
-    "grunt-contrib-jshint": "*",
-    "grunt-contrib-concat": "*",
-    "grunt-contrib-yuidoc": "*",
-    "grunt-contrib-less": "*",
+    "grunt-contrib-coffee": "*",
+    "grunt-contrib-stylus": "*",
     "grunt-contrib-watch": "*",
     "grunt-dependo": "*"
   }
