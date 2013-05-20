@@ -2,12 +2,14 @@
   "name": "MilkSugar",
   "version": "0.0.1",
   "private": true,
-  "dependencies": {
-    "flour": "*",
-    "uglify-js": "*",
-    "coffee-script": "*",
-    "jshint": "*",
-    "stylus": "*",
-    "graceful-fs": "*"
+  "devDependencies": {
+    "grunt": "0.4.x",
+    "grunt-contrib-uglify": "*",
+    "grunt-contrib-jshint": "*",
+    "grunt-contrib-concat": "*",
+    "grunt-contrib-yuidoc": "*",
+    "grunt-contrib-less": "*",
+    "grunt-contrib-watch": "*",
+    "grunt-dependo": "*"
   }
 }
