@@ -1,0 +1,8 @@
+--name        "MilkSugar"
+--readme      README.md
+--title       "MilkSugar API documentation"
+--private 
+--output-dir  doc/api
+./src
+-
+UNLICENSE.md
