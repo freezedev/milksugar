@@ -277,6 +277,23 @@
     })();
   });
 
+  define('milksugar/router', ['root'], function() {
+    var Router;
+
+    return Router = (function() {
+      function Router(routes) {
+        root.routie(routes);
+      }
+
+      Router.prototype.call = function(name) {
+        return root.routie(name);
+      };
+
+      return Router;
+
+    })();
+  });
+
   define('milksugar/ui/animation', function() {
     'use strict';
     var Animation;

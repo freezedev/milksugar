@@ -168,6 +168,14 @@ define 'milksugar/preloader', ['jquery'], ($) ->
     start: ->
       assetPromise.done (assets) ->
         console.log assets        
+define 'milksugar/router', ['root'], ->
+  
+  class Router
+    constructor: (routes) ->
+      root.routie routes
+      
+    call: (name) -> root.routie name
+
 define 'milksugar/ui/animation', ->
   'use strict'
   
