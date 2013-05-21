@@ -8,12 +8,19 @@
       "url": "http://unlicense.org/"
     }
   ],
+  "homepage": "https://github.com/freezedev/milksugar",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/freezedev/milksugar.git"
+  },
   "devDependencies": {
     "grunt": "0.4.x",
     "grunt-contrib-uglify": "*",
     "grunt-contrib-coffee": "*",
     "grunt-contrib-stylus": "*",
     "grunt-contrib-watch": "*",
-    "grunt-dependo": "*"
+    "grunt-dependo": "*",
+    "grunt-coffeelint": "*",
+    "codo": "*"
   }
 }
