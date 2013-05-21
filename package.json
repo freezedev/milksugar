@@ -1,7 +1,13 @@
 {
-  "name": "milkaugar",
+  "name": "milksugar",
   "version": "0.1.0",
   "private": true,
+  "licenses": [
+    {
+      "type": "Unlicense (Public domain)",
+      "url": "http://unlicense.org/"
+    }
+  ],
   "devDependencies": {
     "grunt": "0.4.x",
     "grunt-contrib-uglify": "*",
