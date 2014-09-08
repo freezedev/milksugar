@@ -14,13 +14,14 @@
     "url": "git://github.com/freezedev/milksugar.git"
   },
   "devDependencies": {
+    "codo": "*",
     "grunt": "0.4.x",
-    "grunt-contrib-uglify": "*",
+    "grunt-amd-tamer": "^0.1.8",
+    "grunt-coffeelint": "*",
     "grunt-contrib-coffee": "*",
     "grunt-contrib-stylus": "*",
+    "grunt-contrib-uglify": "*",
     "grunt-contrib-watch": "*",
-    "grunt-dependo": "*",
-    "grunt-coffeelint": "*",
-    "codo": "*"
+    "grunt-dependo": "*"
   }
 }
