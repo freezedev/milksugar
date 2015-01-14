@@ -22,6 +22,8 @@ define 'milksugar/app', ['check', 'jquery', 'milksugar/assets'], (check, $, Asse
           for key, value of assets
             Assets.add(key, value)
       ###
+    
+    add: (screen) ->
       
     run: ->
       $('title').html @name if @name
