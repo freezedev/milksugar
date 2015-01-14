@@ -1,4 +1,4 @@
-define 'milksugar/widget', ->
+define ->
   'use strict'
    
   class Widget
