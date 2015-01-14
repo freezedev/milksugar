@@ -1,13 +1,17 @@
 module.exports = (grunt) ->
   
   grunt.initConfig
-    pkg: grunt.file.readJSON('package.json'),
+    pkg: grunt.file.readJSON('package.json')
+    amd_tamer:
+      all:
+        files:
+          'dist/<%= pkg.name %>.coffee': ['src/**/*.coffee']
     coffee:
       compile:
         options:
           sourceMap: true
         files:
-          'dist/<%= pkg.name %>.js': ['src/**/*.coffee']
+          'dist/<%= pkg.name %>.js': 'dist/<%= pkg.name %>.coffee'
     uglify:
       options:
         banner: '/*! <%= pkg.name %> - v<%= pkg.version %> - <%= grunt.template.today("dd-mm-yyyy") %> */\n'
