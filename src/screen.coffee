@@ -1,4 +1,4 @@
-define 'milksugar/screen', ->
+define ->
   
   class Screen
     constructor: (options) ->
@@ -6,4 +6,5 @@ define 'milksugar/screen', ->
       @route = '/' + @name
       
       
-    add: ->
+    addWidget: (widget) ->
+      
