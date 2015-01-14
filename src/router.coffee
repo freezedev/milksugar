@@ -1,4 +1,4 @@
-define 'milksugar/router', ['root'], ->
+define ['root'], ->
   
   class Router
     constructor: (routes) ->
