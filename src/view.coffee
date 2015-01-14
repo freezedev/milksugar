@@ -1,4 +1,4 @@
-define 'milksugar/view', ['check', 'jquery', 'handlebars'], (check, $, Handlebars) ->
+define ['check', 'jquery', 'handlebars'], (check, $, Handlebars) ->
 
   class MilkSugar.View    
     
