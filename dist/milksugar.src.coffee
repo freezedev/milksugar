@@ -36,12 +36,6 @@ define 'milksugar/assets', ->
         MilkSugar.Assets.path MilkSugar.Assets.root, realPathName, assetName
     remove: (pathName) -> delete @[pathName] if @[pathName]
     path: (paths...) -> paths.join '/'
-define 'milksugar/capsule', ->
-  'use strict'
-   
-  class MilkSugar.Capsule
-    constructor: ->
-    
 define "requestAnimationFrame", ["root"], (root) ->
   
   # frameRate is only used if requestAnimationFrame is not available
@@ -176,6 +170,16 @@ define 'milksugar/router', ['root'], ->
       
     call: (name) -> root.routie name
 
+define 'milksugar/screen', ->
+  
+  class Screen
+    constructor: (options) ->
+      @name = options.name || 'home'
+      @route = '/' + @name
+      
+      
+    add: ->
+
 define 'milksugar/ui/animation', ->
   'use strict'
   
@@ -215,3 +219,9 @@ define 'milksugar/view', ['check', 'jquery', 'handlebars'], (check, $, Handlebar
       $.ajax(@view).done(->
         
       )
+define 'milksugar/widget', ->
+  'use strict'
+   
+  class Widget
+    constructor: ->
+    

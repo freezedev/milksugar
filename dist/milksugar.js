@@ -4,12 +4,12 @@
   define('milksugar/app', ['check', 'jquery', 'milksugar/assets'], function(check, $, Assets) {
     'use strict';
     var App;
-
     return App = (function() {
       function App(assets) {
         if (assets == null) {
           assets = ['image', 'view'];
         }
+
         /*
         if assets? 
           check(assets)
@@ -27,8 +27,7 @@
           else
             for key, value of assets
               Assets.add(key, value)
-        */
-
+         */
       }
 
       App.prototype.run = function() {
@@ -45,7 +44,6 @@
   define('milksugar/assets', function() {
     "use strict";
     var Assets;
-
     return Assets = {
       root: 'assets',
       add: function(pathName, alias) {
@@ -54,7 +52,6 @@
         }
         return this[pathName] = function(assetName) {
           var realPathName;
-
           realPathName = alias ? alias : pathName;
           return MilkSugar.Assets.path(MilkSugar.Assets.root, realPathName, assetName);
         };
@@ -66,25 +63,14 @@
       },
       path: function() {
         var paths;
-
         paths = 1 <= arguments.length ? __slice.call(arguments, 0) : [];
         return paths.join('/');
       }
     };
   });
 
-  define('milksugar/capsule', function() {
-    'use strict';    return MilkSugar.Capsule = (function() {
-      function Capsule() {}
-
-      return Capsule;
-
-    })();
-  });
-
   define("requestAnimationFrame", ["root"], function(root) {
     var frameRate, requestAnimationFrame, vendors, x;
-
     frameRate = 60;
     requestAnimationFrame = root.requestAnimationFrame;
     vendors = ["ms", "moz", "webkit", "o"];
@@ -106,7 +92,6 @@
 
   define("cancelAnimationFrame", ["root"], function(root) {
     var cancelAnimationFrame, cancelRequestAnimationFrame, vendors, x;
-
     cancelAnimationFrame = root.cancelAnimationFrame;
     vendors = ["ms", "moz", "webkit", "o"];
     x = 0;
@@ -124,17 +109,15 @@
     }
   });
 
+
   /*
     Cloning objects
-  */
-
+   */
 
   define('clone', function() {
     var clone;
-
     return clone = function(obj) {
       var flags, key, newInstance;
-
       if ((obj == null) || typeof obj !== 'object') {
         return obj;
       }
@@ -166,12 +149,11 @@
   });
 
   (function(root) {
+
     /*
       Console object fixes
-    */
-
+     */
     var console, i, method, methods, noop, _i, _len, _results;
-
     noop = function() {};
     methods = ['assert', 'clear', 'count', 'debug', 'dir', 'dirxml', 'error', 'exception', 'group', 'groupCollapsed', 'groupEnd', 'info', 'log', 'markTimeline', 'profile', 'profileEnd', 'table', 'time', 'timeEnd', 'timeStamp', 'trace', 'warn'];
     console = (root.console || (root.console = {}));
@@ -184,17 +166,15 @@
     return _results;
   })(this);
 
+
   /*
    Extending objects
-  */
-
+   */
 
   define('extend', function() {
     var extend;
-
     return extend = function() {
       var key, obj, objects, target, value, _i, _len;
-
       target = arguments[0], objects = 2 <= arguments.length ? __slice.call(arguments, 1) : [];
       for (_i = 0, _len = objects.length; _i < _len; _i++) {
         obj = objects[_i];
@@ -207,17 +187,15 @@
     };
   });
 
+
   /*
     Provides a hashcode for strings
-  */
-
+   */
 
   define('hashcode', function() {
     var hashCode;
-
     return hashCode = function(str) {
       var char, hash, i, _i, _len;
-
       hash = 0;
       if (this.length === 0) {
         return hash;
@@ -241,7 +219,6 @@
   define('milksugar/preloader', ['jquery'], function($) {
     'use strict';
     var Preloader;
-
     return Preloader = (function() {
       var assetPromise;
 
@@ -249,7 +226,6 @@
 
       function Preloader(assets) {
         var defer;
-
         if (Array.isArray(assets)) {
           defer = $.Deferred();
           defer.resolve(assets);
@@ -279,7 +255,6 @@
 
   define('milksugar/router', ['root'], function() {
     var Router;
-
     return Router = (function() {
       function Router(routes) {
         root.routie(routes);
@@ -294,10 +269,24 @@
     })();
   });
 
+  define('milksugar/screen', function() {
+    var Screen;
+    return Screen = (function() {
+      function Screen(options) {
+        this.name = options.name || 'home';
+        this.route = '/' + this.name;
+      }
+
+      Screen.prototype.add = function() {};
+
+      return Screen;
+
+    })();
+  });
+
   define('milksugar/ui/animation', function() {
     'use strict';
     var Animation;
-
     return Animation = {
       interval: 300
     };
@@ -306,7 +295,6 @@
   define('milksugar/ui/lightbox', function() {
     'use strict';
     var Lightbox;
-
     return Lightbox = (function() {
       function Lightbox() {}
 
@@ -333,7 +321,6 @@
 
       View.prototype.render = function(options) {
         var dataObject;
-
         dataObject = null;
         check(this.data).array(function(data) {
           return dataObject = $.when(this.data);
@@ -354,8 +341,17 @@
     })();
   });
 
+  define('milksugar/widget', function() {
+    'use strict';
+    var Widget;
+    return Widget = (function() {
+      function Widget() {}
+
+      return Widget;
+
+    })();
+  });
+
 }).call(this);
 
-/*
-//@ sourceMappingURL=milksugar.js.map
-*/
+//# sourceMappingURL=milksugar.js.map
