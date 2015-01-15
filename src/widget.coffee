@@ -3,4 +3,5 @@ define ->
    
   class Widget
     constructor: ->
+      @data = {}
     
