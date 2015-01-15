@@ -1,9 +1,11 @@
-define 'milksugar/app', ['check', 'jquery', 'milksugar/assets'], (check, $, Assets) ->
+define ['jquery'], ($) ->
   'use strict'
   
   class App
     
     constructor: (assets = ['image', 'view']) ->
+      @screens = []
+      @data = {}
       ###
       if assets? 
         check(assets)
@@ -23,7 +25,11 @@ define 'milksugar/app', ['check', 'jquery', 'milksugar/assets'], (check, $, Asse
             Assets.add(key, value)
       ###
     
-    add: (screen) ->
-      
+    addScreen: (screen) ->
+      screens.push screen
+
     run: ->
-      $('title').html @name if @name
+      $title = $ 'title'
+
+      if $title.html()? and @name?
+        $('title').html @name
