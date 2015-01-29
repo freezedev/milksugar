@@ -1,14 +1,16 @@
-define ['./widget'] ->
-  
-  class Screen
-    constructor: (options) ->
-      @name = options.name || 'home'
-      @route = "/#{@name}"
-      @widgets = {}
-      @template = ""
+Widget = require './widget'
 
-    addWidget: (widget) ->
+class Screen
+  constructor: (options) ->
+    @name = options.name || 'home'
+    @route = "/#{@name}"
+    @widgets = {}
+    @template = ""
 
-    render: ->
+  addWidget: (widget) ->
 
-  Screen.$container = $('.screen-container')
+  render: ->
+
+Screen.$container = $('.screen-container')
+
+module.exports = Screen
