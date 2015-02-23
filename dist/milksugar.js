@@ -1,7 +1,8 @@
 (function() {
-  var __slice = [].slice;
+  var Screen, Widget,
+    slice = [].slice;
 
-  define('milksugar/app', ['check', 'jquery', 'milksugar/assets'], function(check, $, Assets) {
+  define('milksugar/app', ['jquery'], function($) {
     'use strict';
     var App;
     return App = (function() {
@@ -9,6 +10,8 @@
         if (assets == null) {
           assets = ['image', 'view'];
         }
+        this.screens = [];
+        this.data = {};
 
         /*
         if assets? 
@@ -30,8 +33,14 @@
          */
       }
 
+      App.prototype.addScreen = function(screen) {
+        return screens.push(screen);
+      };
+
       App.prototype.run = function() {
-        if (this.name) {
+        var $title;
+        $title = $('title');
+        if (($title.html() != null) && (this.name != null)) {
           return $('title').html(this.name);
         }
       };
@@ -48,7 +57,7 @@
       root: 'assets',
       add: function(pathName, alias) {
         if (alias == null) {
-          alias = "" + pathName + "s";
+          alias = pathName + "s";
         }
         return this[pathName] = function(assetName) {
           var realPathName;
@@ -63,50 +72,10 @@
       },
       path: function() {
         var paths;
-        paths = 1 <= arguments.length ? __slice.call(arguments, 0) : [];
+        paths = 1 <= arguments.length ? slice.call(arguments, 0) : [];
         return paths.join('/');
       }
     };
-  });
-
-  define("requestAnimationFrame", ["root"], function(root) {
-    var frameRate, requestAnimationFrame, vendors, x;
-    frameRate = 60;
-    requestAnimationFrame = root.requestAnimationFrame;
-    vendors = ["ms", "moz", "webkit", "o"];
-    x = 0;
-    while (x < vendors.length && !window.requestAnimationFrame) {
-      requestAnimationFrame = root[vendors[x] + "RequestAnimationFrame"];
-      if (requestAnimationFrame) {
-        break;
-      }
-      ++x;
-    }
-    if (!requestAnimationFrame) {
-      requestAnimationFrame = function(callback) {
-        return window.setTimeout(callback, ~~(1000 / window.frameRate));
-      };
-    }
-    return requestAnimationFrame;
-  });
-
-  define("cancelAnimationFrame", ["root"], function(root) {
-    var cancelAnimationFrame, cancelRequestAnimationFrame, vendors, x;
-    cancelAnimationFrame = root.cancelAnimationFrame;
-    vendors = ["ms", "moz", "webkit", "o"];
-    x = 0;
-    while (x < vendors.length && !window.requestAnimationFrame) {
-      cancelRequestAnimationFrame = root[vendors[x] + "CancelRequestAnimationFrame"];
-      if (cancelAnimationFrame) {
-        break;
-      }
-      ++x;
-    }
-    if (!cancelAnimationFrame) {
-      return cancelAnimationFrame = function(id) {
-        return clearTimeout(id);
-      };
-    }
   });
 
 
@@ -153,18 +122,20 @@
     /*
       Console object fixes
      */
-    var console, i, method, methods, noop, _i, _len, _results;
+    var console, i, j, len, method, methods, noop, results;
     noop = function() {};
     methods = ['assert', 'clear', 'count', 'debug', 'dir', 'dirxml', 'error', 'exception', 'group', 'groupCollapsed', 'groupEnd', 'info', 'log', 'markTimeline', 'profile', 'profileEnd', 'table', 'time', 'timeEnd', 'timeStamp', 'trace', 'warn'];
     console = (root.console || (root.console = {}));
-    _results = [];
-    for (_i = 0, _len = methods.length; _i < _len; _i++) {
-      i = methods[_i];
+    results = [];
+    for (j = 0, len = methods.length; j < len; j++) {
+      i = methods[j];
       method = methods[i];
-      _results.push(console[method] || (console[method] = noop));
+      results.push(console[method] || (console[method] = noop));
     }
-    return _results;
+    return results;
   })(this);
+
+  define('milksugar/core/console', function() {});
 
 
   /*
@@ -174,10 +145,10 @@
   define('extend', function() {
     var extend;
     return extend = function() {
-      var key, obj, objects, target, value, _i, _len;
-      target = arguments[0], objects = 2 <= arguments.length ? __slice.call(arguments, 1) : [];
-      for (_i = 0, _len = objects.length; _i < _len; _i++) {
-        obj = objects[_i];
+      var j, key, len, obj, objects, target, value;
+      target = arguments[0], objects = 2 <= arguments.length ? slice.call(arguments, 1) : [];
+      for (j = 0, len = objects.length; j < len; j++) {
+        obj = objects[j];
         for (key in obj) {
           value = obj[key];
           target[key] = value;
@@ -195,13 +166,13 @@
   define('hashcode', function() {
     var hashCode;
     return hashCode = function(str) {
-      var char, hash, i, _i, _len;
+      var char, hash, i, j, len;
       hash = 0;
       if (this.length === 0) {
         return hash;
       }
-      for (_i = 0, _len = str.length; _i < _len; _i++) {
-        i = str[_i];
+      for (j = 0, len = str.length; j < len; j++) {
+        i = str[j];
         char = str.charCodeAt(i);
         hash = ((hash << 5) - hash) + char;
         hash = hash & hash;
@@ -269,20 +240,29 @@
     })();
   });
 
-  define('milksugar/screen', function() {
-    var Screen;
-    return Screen = (function() {
-      function Screen(options) {
-        this.name = options.name || 'home';
-        this.route = '/' + this.name;
-      }
+  Widget = require('./widget');
 
-      Screen.prototype.add = function() {};
+  Screen = (function() {
+    function Screen(options) {
+      this.name = options.name || 'home';
+      this.route = "/" + this.name;
+      this.widgets = {};
+      this.template = "";
+    }
 
-      return Screen;
+    Screen.prototype.addWidget = function(widget) {};
 
-    })();
-  });
+    Screen.prototype.render = function() {};
+
+    return Screen;
+
+  })();
+
+  Screen.$container = $('.screen-container');
+
+  module.exports = Screen;
+
+  define('milksugar/screen', function() {});
 
   define('milksugar/ui/animation', function() {
     'use strict';
@@ -303,49 +283,12 @@
     })();
   });
 
-  define('milksugar/view', ['check', 'jquery', 'handlebars'], function(check, $, Handlebars) {
-    return MilkSugar.View = (function() {
-      function View(view) {
-        this.view = view;
-      }
-
-      View.prototype.data = null;
-
-      View.prototype.subviews = [];
-
-      View.prototype.partials = [];
-
-      View.prototype.helpers = {};
-
-      View.prototype.target = null;
-
-      View.prototype.render = function(options) {
-        var dataObject;
-        dataObject = null;
-        check(this.data).array(function(data) {
-          return dataObject = $.when(this.data);
-        }).object(function(data) {
-          return dataObject = $.Deferred(function(defer) {
-            return defer.resolve([data]);
-          }).promise();
-        }).string(function(data) {
-          return dataObject = $.ajax(data);
-        });
-        check(this.partials);
-        check(this.subviews);
-        return $.ajax(this.view).done(function() {});
-      };
-
-      return View;
-
-    })();
-  });
-
   define('milksugar/widget', function() {
     'use strict';
-    var Widget;
     return Widget = (function() {
-      function Widget() {}
+      function Widget() {
+        this.data = {};
+      }
 
       return Widget;
 

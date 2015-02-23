@@ -1,9 +1,11 @@
-define 'milksugar/app', ['check', 'jquery', 'milksugar/assets'], (check, $, Assets) ->
+define 'milksugar/app', ['jquery'], ($) ->
   'use strict'
   
   class App
     
     constructor: (assets = ['image', 'view']) ->
+      @screens = []
+      @data = {}
       ###
       if assets? 
         check(assets)
@@ -22,9 +24,15 @@ define 'milksugar/app', ['check', 'jquery', 'milksugar/assets'], (check, $, Asse
           for key, value of assets
             Assets.add(key, value)
       ###
-      
+    
+    addScreen: (screen) ->
+      screens.push screen
+
     run: ->
-      $('title').html @name if @name
+      $title = $ 'title'
+
+      if $title.html()? and @name?
+        $('title').html @name
 define 'milksugar/assets', ->
   "use strict";
    
@@ -36,36 +44,6 @@ define 'milksugar/assets', ->
         MilkSugar.Assets.path MilkSugar.Assets.root, realPathName, assetName
     remove: (pathName) -> delete @[pathName] if @[pathName]
     path: (paths...) -> paths.join '/'
-define "requestAnimationFrame", ["root"], (root) ->
-  
-  # frameRate is only used if requestAnimationFrame is not available
-  frameRate = 60
-  requestAnimationFrame = root.requestAnimationFrame
-  vendors = ["ms", "moz", "webkit", "o"]
-  x = 0
-
-  while x < vendors.length and not window.requestAnimationFrame
-    requestAnimationFrame = root[vendors[x] + "RequestAnimationFrame"]
-    break  if requestAnimationFrame
-    ++x
-  unless requestAnimationFrame
-    requestAnimationFrame = (callback) ->
-      window.setTimeout callback, ~~(1000 / window.frameRate)
-  requestAnimationFrame
-
-define "cancelAnimationFrame", ["root"], (root) ->
-  cancelAnimationFrame = root.cancelAnimationFrame
-  vendors = ["ms", "moz", "webkit", "o"]
-  x = 0
-
-  while x < vendors.length and not window.requestAnimationFrame
-    cancelRequestAnimationFrame = root[vendors[x] + "CancelRequestAnimationFrame"]
-    break  if cancelAnimationFrame
-    ++x
-  unless cancelAnimationFrame
-    cancelAnimationFrame = (id) ->
-      clearTimeout id
-
 ###
   Cloning objects
 ###
@@ -109,6 +87,8 @@ do (root = @) ->
     
     console[method] or= noop
 
+
+define('milksugar/core/console', ->  )
 ###
  Extending objects
 ###
@@ -170,16 +150,24 @@ define 'milksugar/router', ['root'], ->
       
     call: (name) -> root.routie name
 
-define 'milksugar/screen', ->
-  
-  class Screen
-    constructor: (options) ->
-      @name = options.name || 'home'
-      @route = '/' + @name
-      
-      
-    add: ->
+Widget = require './widget'
 
+class Screen
+  constructor: (options) ->
+    @name = options.name || 'home'
+    @route = "/#{@name}"
+    @widgets = {}
+    @template = ""
+
+  addWidget: (widget) ->
+
+  render: ->
+
+Screen.$container = $('.screen-container')
+
+module.exports = Screen
+
+define('milksugar/screen', ->  )
 define 'milksugar/ui/animation', ->
   'use strict'
   
@@ -192,36 +180,10 @@ define 'milksugar/ui/lightbox', ->
   class Lightbox
     constructor: ->
 
-define 'milksugar/view', ['check', 'jquery', 'handlebars'], (check, $, Handlebars) ->
-
-  class MilkSugar.View    
-    
-    constructor: (@view) ->
-    
-    data: null
-    subviews: []
-    partials: []
-    helpers: {}
-    target: null
-      
-    render: (options) ->
-      dataObject = null
-      
-      check(@data)
-        .array((data) -> dataObject = $.when @data)
-        .object((data) -> dataObject = $.Deferred((defer) -> defer.resolve([data])).promise())
-        .string((data) -> dataObject = $.ajax data)
-        
-      check(@partials)
-      
-      check(@subviews)
-      
-      $.ajax(@view).done(->
-        
-      )
 define 'milksugar/widget', ->
   'use strict'
    
   class Widget
     constructor: ->
+      @data = {}
     

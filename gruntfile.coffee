@@ -3,6 +3,9 @@ module.exports = (grunt) ->
   grunt.initConfig
     pkg: grunt.file.readJSON('package.json')
     amd_tamer:
+      options:
+        base: 'src/'
+        namespace: 'milksugar'
       all:
         files:
           'dist/<%= pkg.name %>.coffee': ['src/**/*.coffee']
@@ -31,6 +34,7 @@ module.exports = (grunt) ->
         output: 'doc/api'
         title: 'MilkSugar API Documentation'
   
+  grunt.loadNpmTasks 'grunt-amd-tamer'
   grunt.loadNpmTasks 'grunt-contrib-coffee'
   grunt.loadNpmTasks 'grunt-contrib-uglify'
   grunt.loadNpmTasks 'grunt-contrib-stylus'
@@ -38,7 +42,7 @@ module.exports = (grunt) ->
   grunt.loadNpmTasks 'grunt-dependo'
   grunt.loadNpmTasks 'grunt-coffeelint'
   
-  grunt.registerTask 'doc', 'Generated documentation', ['codo', 'dependo']
+  grunt.registerTask 'doc', 'Generated documentation', []
   grunt.registerTask 'lint', ['coffeelint']
   grunt.registerTask 'codo', ->
     done = @async()
@@ -46,4 +50,4 @@ module.exports = (grunt) ->
     codo = require 'codo'
     
     codo.run -> done()
-  grunt.registerTask 'default', 'Default task', ['coffee', 'uglify', 'doc']
+  grunt.registerTask 'default', 'Default task', ['amd_tamer', 'coffee', 'uglify', 'doc']
